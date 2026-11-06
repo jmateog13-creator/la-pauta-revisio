@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>La Pauta · revisió</title>
+<style>
+  :root { --bg:#f4ecdc; --ink:#1d1a16; --mark:#c8321e; --card:#fffaf0; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui, sans-serif; }
+  header { max-width:1100px; margin:0 auto; padding:40px 16px 8px; }
+  h1 { margin:0; font-size:clamp(28px,5vw,44px); letter-spacing:-.02em; }
+  h1 span { color:var(--mark); }
+  header p { max-width:680px; }
+  main { max-width:1100px; margin:0 auto; padding:16px; display:grid; gap:20px; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+  article { background:var(--card); border:2px solid var(--ink); border-radius:6px; overflow:hidden; }
+  video { display:block; width:100%; aspect-ratio:16/9; background:#000; }
+  article div { padding:10px 14px 14px; }
+  h3 { margin:0; font-size:17px; }
+  .sec { max-width:1100px; margin:24px auto 0; padding:0 16px; font-size:24px; }
+  footer { max-width:1100px; margin:0 auto; padding:24px 16px 48px; font-size:14px; opacity:.7; }
+</style>
+</head>
+<body>
+<header>
+  <h1>La <span>Pauta</span> · vídeos en revisió</h1>
+  <p>Càpsules d'uns 2 minuts per a 3r–4t d'ESO, pensades per projectar a classe. Són esborranys en revisió: mira les que vulguis i digues-me què en penses (s'entén? ho posaries a classe? què hi canviaries?).</p>
+</header>
+<main id="llista"></main>
+<footer>Material en revisió, no publicat. © Javier Mateo García per a Aulatech.</footer>
+<script src="videos.js"></script>
+<script>
+const SEC = [['lp-chr', 'Història de la música'], ['lp-cin', 'Música de cinema'], ['lp-vid', 'Llenguatge musical']];
+document.getElementById('llista').outerHTML = SEC.map(([k, nom]) => `
+  <h2 class="sec">${nom}</h2>
+  <main>${V.filter(([f]) => f.startsWith(k)).map(([f, t]) => `
+    <article>
+      <video controls preload="metadata" src="videos/${f}.mp4#t=4"></video>
+      <div><h3>${t}</h3></div>
+    </article>`).join('')}</main>`).join('');
+</script>
+</body>
+</html>
